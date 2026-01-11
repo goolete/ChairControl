@@ -219,14 +219,6 @@ if (Select.select_hand == true) {
 }
 ```
 
-#### 设置值持久化
-SettingActivity中的范围设置值根据左右手分别保存:
-- **键名格式**: `"[true/false]_[sliderId]_[lowerValue/upperValue]"`
-- **示例**: 
-  - 左手拇指下限: `"false_2131234567_lowerValue"`
-  - 右手拇指下限: `"true_2131234567_lowerValue"`
-
----
 
 ### 3.4 用户交互触发机制
 
@@ -239,11 +231,6 @@ SettingActivity中的范围设置值根据左右手分别保存:
 - **触发**: 滑块松开事件 (ACTION_UP)
 - **发送**: 仅在值变化时发送
 - **特点**: 避免拖动过程中频繁发送
-
-#### 设置模式
-- **触发**: RangeSlider松开事件 (onStopTrackingTouch)
-- **发送**: 分别检测下限和上限变化
-- **特点**: 同时保存到SharedPreferences
 
 ---
 
@@ -258,9 +245,6 @@ SettingActivity中的范围设置值根据左右手分别保存:
 | 手动模式进入 | `AA BB 02 CC` | 4字节 | onCreate | 是(800ms) | 是("state manual\r\n") |
 | 手动模式退出 | `AA BB FF CC` | 4字节 | onDestroy | 否 | 否 |
 | 电机控制 | `AA BB [电机] [档位] CC` | 5字节 | 滑块松开 | 否 | 否 |
-| 设置模式进入 | `AA BB 04 CC` | 4字节 | onCreate | 是(800ms) | 是("state set\r\n") |
-| 设置模式退出 | `AA BB FF CC` | 4字节 | onDestroy | 否 | 否 |
-| 范围设置 | `AA BB [电机] [类型] [值] CC` | 6字节 | 滑块松开 | 否 | 否 |
 
 ---
 
